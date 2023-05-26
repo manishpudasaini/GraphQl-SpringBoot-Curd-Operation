@@ -43,7 +43,11 @@ public class BookServiceImpl implements BookService {
         return bookRepo.findAll()
                 .stream()
                 .map(book ->
-                        convertToResponse(book))
+                        BookDtoResponse.builder()
+                                .name(book.getName())
+                                .author(book.getAuthor())
+                                .price(book.getPrice())
+                                .page(book.getPage()).build())
                 .collect(Collectors.toList());
     }
 
