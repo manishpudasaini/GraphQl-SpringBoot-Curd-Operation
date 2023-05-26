@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDtoResponse getBook(Long id) {
+    public BookDtoResponse getBook(Integer id) {
 
         Optional<Book> singleBook = bookRepo.findById(id);
 
@@ -52,7 +52,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDtoResponse updateBook(BookDtoRequest bookDtoRequest, Long id) {
+    public BookDtoResponse updateBook(BookDtoRequest bookDtoRequest, Integer id) {
        Optional<Book> book = bookRepo.findById(id);
        if(book.isPresent()){
            Book singleBook = book.get();

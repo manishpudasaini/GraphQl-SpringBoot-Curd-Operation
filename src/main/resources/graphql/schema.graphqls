@@ -1,0 +1,11 @@
+type Query{
+    getAllBook: [BookDtoResponse]
+    getBookId(bookId:Int): BookDtoResponse
+}
+
+type BookDtoResponse{
+    name: String
+    author: String
+    price: Float
+    page: Int
+}
