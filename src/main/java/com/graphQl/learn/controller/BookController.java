@@ -4,6 +4,7 @@ import com.graphQl.learn.dto.BookDtoRequest;
 import com.graphQl.learn.dto.BookDtoResponse;
 import com.graphQl.learn.service.BookService;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +19,23 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/add")
-    public BookDtoResponse addBook(@RequestBody BookDtoRequest bookDtoRequest){
-        return bookService.addBook(bookDtoRequest);
+    @MutationMapping("createBook")
+    public BookDtoResponse createBook(@Argument BookDtoRequest book){
+        return bookService.addBook(book);
     }
-    @QueryMapping
+    @QueryMapping("getAllBook")
     public List<BookDtoResponse> getAllBook(){
         return bookService.getAllBook();
     }
 
-    @QueryMapping
+    @QueryMapping("getBookId")
     public BookDtoResponse getBookId(@Argument int bookId){
         return bookService.getBook(bookId);
     }
 
-    @PutMapping("/{id}")
-    public BookDtoResponse updateBook(@RequestBody BookDtoRequest bookDtoRequest, @PathVariable Integer id){
-        return bookService.updateBook(bookDtoRequest,id);
+    @MutationMapping("updateBook")
+    public BookDtoResponse updateBook(@Argument BookDtoRequest book, @Argument Integer bookId){
+        return bookService.updateBook(book,bookId);
     }
 
 }

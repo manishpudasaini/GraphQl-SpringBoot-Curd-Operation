@@ -3,7 +3,19 @@ type Query{
     getBookId(bookId:Int): BookDtoResponse
 }
 
+type Mutation{
+    createBook(book:BookDtoRequest): BookDtoResponse
+    updateBook(book:BookDtoRequest,bookId:Int): BookDtoResponse
+}
+
 type BookDtoResponse{
+    name: String
+    author: String
+    price: Float
+    page: Int
+}
+
+input BookDtoRequest{
     name: String
     author: String
     price: Float
