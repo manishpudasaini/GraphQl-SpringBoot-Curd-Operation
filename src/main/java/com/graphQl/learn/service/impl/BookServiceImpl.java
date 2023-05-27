@@ -2,6 +2,7 @@ package com.graphQl.learn.service.impl;
 
 import com.graphQl.learn.dto.BookDtoRequest;
 import com.graphQl.learn.dto.BookDtoResponse;
+import com.graphQl.learn.exception.BookNotFoundException;
 import com.graphQl.learn.model.Book;
 import com.graphQl.learn.repository.BookRepo;
 import com.graphQl.learn.service.BookService;
@@ -33,8 +34,9 @@ public class BookServiceImpl implements BookService {
         if(singleBook.isPresent()){
             Book book = singleBook.get();
             return convertToResponse(book);
+        }else {
+            throw new BookNotFoundException("Book having this id "+id+ " is not found !!!");
         }
-        return null;
     }
 
     @Override
@@ -63,8 +65,9 @@ public class BookServiceImpl implements BookService {
 
            bookRepo.save(singleBook);
            return convertToResponse(singleBook);
+       }else {
+           throw new BookNotFoundException("Book having this id "+id+ " is not found !!!");
        }
-        return null;
     }
 
     public Book convertToEntity(BookDtoRequest bookDtoRequest){
